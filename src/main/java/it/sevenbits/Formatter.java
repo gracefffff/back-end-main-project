@@ -4,7 +4,6 @@ import it.sevenbits.exceptions.WriterException;
 import it.sevenbits.readers.IReader;
 import it.sevenbits.writers.IWriter;
 
-import java.io.IOException;
 
 /**
  * class for modifying code in Java-code
@@ -22,12 +21,12 @@ public class Formatter {
     private char previousSymbol;
     private boolean whitespace;
 
-    private void addTransition(final IWriter writer) throws WriterException, IOException {
+    private void addTransition(final IWriter writer) throws WriterException {
         writer.write('\n');
         previousSymbol = '\n';
     }
 
-    private void addTabulation(final IWriter writer) throws WriterException, IOException {
+    private void addTabulation(final IWriter writer) throws WriterException {
         if (previousSymbol == '\n') {
             for (int j = 0; j < this.level; ++j) {
                 writer.write('\t');
@@ -41,14 +40,12 @@ public class Formatter {
 
     /**
      * format this method for modifying code to java code from stream
-     * @param reader this object to read charachters from stream
-     * @param writer this object to write charachters in stream
+     * @param reader this object to read character from stream
+     * @param writer this object to write characters in stream
      * @throws ReaderException This class signals that read error occurred
-     * @throws WriterException This class signals that read error occurred
-     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of
-     *                             exceptions produced by failed or interrupted I/O operations.
+     * @throws WriterException This class signals that read error occurred.
      */
-    public void format(final IReader reader, final IWriter writer) throws ReaderException, WriterException, IOException {
+    public void format(final IReader reader, final IWriter writer) throws ReaderException, WriterException {
         char currentSymbol;
         while (reader.hasNext()) {
             currentSymbol = reader.read();
