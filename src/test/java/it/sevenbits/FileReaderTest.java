@@ -1,14 +1,9 @@
 package it.sevenbits;
-
 import it.sevenbits.exceptions.ReaderException;
-import it.sevenbits.exceptions.WriterException;
 import it.sevenbits.readers.FileReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-
 import static junit.framework.TestCase.assertEquals;
 
 public class FileReaderTest {
@@ -16,7 +11,7 @@ public class FileReaderTest {
 
     @Before
     public void setUp() throws ReaderException {
-        fileReader = new FileReader("1.txt");
+        fileReader = new FileReader("src/test/java/it/sevenbits/1.txt");
     }
 
     @After
@@ -26,10 +21,10 @@ public class FileReaderTest {
 
     @Test
     public void testFileReader() throws ReaderException {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         while (fileReader.hasNext()) {
-            result += fileReader.read();
+            result.append(fileReader.read());
         }
-        assertEquals("Wrong result", "hello world!", result);
+        assertEquals("Wrong result", "hello world!\n", result.toString());
     }
 }

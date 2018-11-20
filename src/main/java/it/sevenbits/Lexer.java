@@ -8,12 +8,18 @@ import it.sevenbits.readers.IReader;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * this class makes constructs characters to tokens
+ */
 public class Lexer implements ILexer {
     private Map<String, String> hashMap;
     private IReader reader;
     private char currentSymbol;
 
+    /**
+     * this is constructor of class Lexer
+     * @param reader to read characters from stream
+     */
     public Lexer(final IReader reader) {
         hashMap = new HashMap<>();
         hashMap.put(" ", "SPACE");
@@ -58,21 +64,15 @@ public class Lexer implements ILexer {
                 if (endToken(lexeme, currentSymbol)) {
                     break;
                 }
-
                 lexeme.append(currentSymbol);
-
-
                 if (checkLexeme(lexeme.toString())) {
                     currentSymbol = '\u0000';
-
                     return new Token(getValue(lexeme.toString()), lexeme.toString());
                 }
-
             }
             return new Token("DEFAULT", lexeme.toString());
         } catch (ReaderException ex) {
             throw new LexerException(ex.getMessage());
         }
-
     }
 }

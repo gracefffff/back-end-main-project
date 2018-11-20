@@ -18,7 +18,7 @@ private Formatter formatter;
     }
 
     @Test
-    public void testFormatterSimple() throws ReaderException, WriterException, IOException, LexerException {
+    public void testFormatterSimple() throws ReaderException, WriterException, LexerException {
         StringWriter stringWriter = new StringWriter();
         StringReader stringReader = new StringReader("aaa { bb; ccc ; dddd; eee;         }");
         Lexer lexer = new Lexer(stringReader);
@@ -33,7 +33,7 @@ private Formatter formatter;
         assertEquals("Wrong result",correct , test);
     }
     @Test
-    public void testFormatterCheckTabulation() throws ReaderException, WriterException, IOException, LexerException {
+    public void testFormatterCheckTabulation() throws ReaderException, WriterException, LexerException {
         StringWriter stringWriter = new StringWriter();
           StringReader stringReader = new StringReader ("aaa   {bbbb;  ddd;  ccc   ;}{  { {{}}}}");
         Lexer lexer = new Lexer(stringReader);

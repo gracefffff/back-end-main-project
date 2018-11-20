@@ -1,9 +1,7 @@
 package it.sevenbits;
 
 import it.sevenbits.exceptions.LexerException;
-import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.exceptions.WriterException;
-import it.sevenbits.readers.IReader;
 import it.sevenbits.writers.IWriter;
 
 
@@ -46,16 +44,14 @@ public class Formatter {
     /**
      * format this method for modifying code to java code from stream
      *
-     * @param reader this object to read character from stream
+     * @param lexer  this object to read character from stream and construct it to tokens
      * @param writer this object to write characters in stream
-     * @throws ReaderException This class signals that read error occurred
      * @throws WriterException This class signals that read error occurred.
+     * @throws LexerException  This class signals about Lexer errors
      */
-    public void format(final ILexer lexer, final IWriter writer) throws ReaderException, WriterException, LexerException {
-        char currentSymbol;
+    public void format(final ILexer lexer, final IWriter writer) throws WriterException, LexerException {
         final int countSpace = 4;
         while (lexer.hasMoreTokens()) {
-            //currentSymbol = reader.read();
             IToken token = lexer.readToken();
             switch (token.getName()) {
                 case "SEMICOLON":
