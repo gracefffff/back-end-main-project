@@ -1,5 +1,8 @@
 package it.sevenbits.intefaces;
 
+/**
+ * this is interface of token
+ */
 public interface IToken {
     /**
      *
