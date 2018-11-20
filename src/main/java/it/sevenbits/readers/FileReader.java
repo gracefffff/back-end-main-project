@@ -12,9 +12,13 @@ public class FileReader implements IReader {
     private BufferedReader reader;
     private int symbol;
 
-    public FileReader(final String path) throws IOException {
-        reader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
-         symbol = reader.read();
+    public FileReader(final String path) throws ReaderException {
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
+            symbol = reader.read();
+        } catch (IOException ex) {
+            throw new ReaderException(ex.getMessage());
+        }
     }
 
     @Override

@@ -15,8 +15,8 @@ public class FileReaderTest {
     private FileReader fileReader;
 
     @Before
-    public void setUp() throws IOException {
-        fileReader = new FileReader("text.txt");
+    public void setUp() throws ReaderException {
+        fileReader = new FileReader("1.txt");
     }
 
     @After

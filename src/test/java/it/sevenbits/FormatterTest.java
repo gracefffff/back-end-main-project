@@ -1,4 +1,5 @@
 package it.sevenbits;
+import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.exceptions.WriterException;
 import it.sevenbits.readers.StringReader;
@@ -17,43 +18,44 @@ private Formatter formatter;
     }
 
     @Test
-    public void testFormatterSimple() throws ReaderException, WriterException, IOException {
+    public void testFormatterSimple() throws ReaderException, WriterException, IOException, LexerException {
         StringWriter stringWriter = new StringWriter();
         StringReader stringReader = new StringReader("aaa { bb; ccc ; dddd; eee;         }");
-        formatter.format(stringReader, stringWriter);
+        Lexer lexer = new Lexer(stringReader);
+        formatter.format(lexer, stringWriter);
         String test = stringWriter.getOutput();
         String correct = "aaa {\n" +
-                "\tbb;\n" +
-                "\tccc;\n" +
-                "\tdddd;\n" +
-                "\teee;\n" +
+                "    bb;\n" +
+                "    ccc;\n" +
+                "    dddd;\n" +
+                "    eee;\n" +
                 "}";
         assertEquals("Wrong result",correct , test);
     }
     @Test
-    public void testFormatterCheckTabulation() throws ReaderException, WriterException, IOException {
+    public void testFormatterCheckTabulation() throws ReaderException, WriterException, IOException, LexerException {
         StringWriter stringWriter = new StringWriter();
           StringReader stringReader = new StringReader ("aaa   {bbbb;  ddd;  ccc   ;}{  { {{}}}}");
-
-        formatter.format(stringReader,stringWriter);
+        Lexer lexer = new Lexer(stringReader);
+        formatter.format(lexer,stringWriter);
         String test = stringWriter.getOutput();
         String correct = "aaa {\n" +
-                "\tbbbb;\n" +
-                "\tddd;\n" +
-                "\tccc;\n" +
+                "    bbbb;\n" +
+                "    ddd;\n" +
+                "    ccc;\n" +
                 "}\n" +
                 "{\n" +
-                "\t{\n" +
-                "\t\t{\n" +
-                "\t\t\t{\n" +
-                "\t\t\t}\n" +
-                "\t\t}\n" +
-                "\t}\n" +
+                "    {\n" +
+                "        {\n" +
+                "            {\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
                 "}";
          assertEquals("Wrong result",correct , test);
     }
     @Test
-    public void testFormatterHelloWorld() throws ReaderException, WriterException, IOException {
+    public void testFormatterHelloWorld() throws ReaderException, WriterException, IOException, LexerException {
         StringWriter stringWriter = new StringWriter();
         StringReader stringReader = new StringReader ("public class HelloWorld {\n" +
                 "\n" +
@@ -62,13 +64,13 @@ private Formatter formatter;
                 "        System.out.println(\"Hello, World\");\n" +
                 "    }\n" +
                 "}");
-
-        formatter.format(stringReader,stringWriter);
+        Lexer lexer = new Lexer(stringReader);
+        formatter.format(lexer,stringWriter);
         String test = stringWriter.getOutput();
         String correct = "public class HelloWorld {\n" +
-                "\tpublic static void main(String[] args) {\n" +
-                "\t\t// Prints \"Hello, World\" to the terminal window. System.out.println(\"Hello, World\");\n" +
-                "\t}\n" +
+                "    public static void main(String[] args) {\n" +
+                "        // Prints \"Hello, World\" to the terminal window. System.out.println(\"Hello, World\");\n" +
+                "    }\n" +
                 "}";
         assertEquals("Wrong result",correct , test);
     }

@@ -1,4 +1,6 @@
 package it.sevenbits;
+
+import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.exceptions.WriterException;
 import it.sevenbits.readers.IReader;
@@ -27,9 +29,12 @@ public class Formatter {
     }
 
     private void addTabulation(final IWriter writer) throws WriterException {
+        final int countSpace = 4;
         if (previousSymbol == '\n') {
             for (int j = 0; j < this.level; ++j) {
-                writer.write('\t');
+                for (int i = 0; i < countSpace; i++) {
+                    writer.write(' ');
+                }
             }
         } else {
             if (whitespace) {
@@ -40,57 +45,70 @@ public class Formatter {
 
     /**
      * format this method for modifying code to java code from stream
+     *
      * @param reader this object to read character from stream
      * @param writer this object to write characters in stream
      * @throws ReaderException This class signals that read error occurred
      * @throws WriterException This class signals that read error occurred.
      */
-    public void format(final IReader reader, final IWriter writer) throws ReaderException, WriterException {
+    public void format(final ILexer lexer, final IWriter writer) throws ReaderException, WriterException, LexerException {
         char currentSymbol;
-        while (reader.hasNext()) {
-            currentSymbol = reader.read();
-            switch (currentSymbol) {
-                case ';':
-                    writer.write(currentSymbol);
+        final int countSpace = 4;
+        while (lexer.hasMoreTokens()) {
+            //currentSymbol = reader.read();
+            IToken token = lexer.readToken();
+            switch (token.getName()) {
+                case "SEMICOLON":
+                    for (int i = 0; i < token.getLexeme().length(); i++) {
+                        writer.write(token.getLexeme().charAt(i));
+                    }
                     addTransition(writer);
                     whitespace = false;
                     break;
-                case '{':
+                case "OPENBRACE":
                     addTabulation(writer);
                     if (previousSymbol == ' ') {
                         writer.write(previousSymbol);
                     }
-                    writer.write(currentSymbol);
+                    for (int i = 0; i < token.getLexeme().length(); i++) {
+                        writer.write(token.getLexeme().charAt(i));
+                    }
                     addTransition(writer);
                     level++;
                     whitespace = false;
                     break;
-                case '}':
+                case "CLOSEBRACE":
                     level--;
                     if (previousSymbol == '\n') {
                         for (int j = 0; j < this.level; ++j) {
-                            writer.write('\t');
+                            for (int i = 0; i < countSpace; i++) {
+                                writer.write(' ');
+                            }
                         }
                     }
-                    writer.write(currentSymbol);
-                    if (reader.hasNext()) {
+                    for (int i = 0; i < token.getLexeme().length(); i++) {
+                        writer.write(token.getLexeme().charAt(i));
+                    }
+                    if (lexer.hasMoreTokens()) {
                         addTransition(writer);
                     }
                     whitespace = false;
                     break;
-                case ' ':
+                case "SPACE":
                     if (previousSymbol != '\u0000') {
                         whitespace = true;
                     }
                     break;
-                case '\n':
+                case "NEWLINE":
                     break;
-                case '\t':
+                case "TABULATION":
                     break;
                 default:
                     addTabulation(writer);
-                    writer.write(currentSymbol);
-                    previousSymbol = currentSymbol;
+                    for (int i = 0; i < token.getLexeme().length(); i++) {
+                        writer.write(token.getLexeme().charAt(i));
+                    }
+                    previousSymbol = token.getLexeme().charAt(token.getLexeme().length() - 1);
                     whitespace = false;
                     break;
             }

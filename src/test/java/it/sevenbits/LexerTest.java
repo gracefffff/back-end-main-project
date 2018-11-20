@@ -16,7 +16,7 @@ public class LexerTest {
     private Lexer lexer;
     private FileReader reader;
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws ReaderException {
         reader = new FileReader("src/test/java/it/sevenbits/text.txt");
         lexer = new Lexer(reader);
     }
@@ -31,7 +31,7 @@ public class LexerTest {
            result.append(lexer.readToken().getName());
            result.append(' ');
         }
-        assertEquals("Wrong result","d",result.toString());
+        assertEquals("Wrong result","CLOSEBRACE SPACE CLOSEBRACE SPACE OPENBRACE SPACE OPENBRACE DEFAULT SEMICOLON SPACE NEWLINE ",result.toString());
 
     }
 
