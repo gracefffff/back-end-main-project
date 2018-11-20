@@ -1,3 +1,4 @@
+package it.sevenbits;
 import it.sevenbits.formatters.Formatter;
 import it.sevenbits.lexers.Lexer;
 import it.sevenbits.exceptions.LexerException;
@@ -5,9 +6,6 @@ import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.exceptions.WriterException;
 import it.sevenbits.readers.FileReader;
 import it.sevenbits.writers.FileWriter;
-
-
-
 
 /**
  * main class
