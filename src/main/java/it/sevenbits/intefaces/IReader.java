@@ -1,4 +1,4 @@
-package it.sevenbits.readers;
+package it.sevenbits.intefaces;
 
 import it.sevenbits.exceptions.ReaderException;
 

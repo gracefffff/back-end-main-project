@@ -1,4 +1,4 @@
-package it.sevenbits.writers;
+package it.sevenbits.intefaces;
 
 import it.sevenbits.exceptions.WriterException;
 

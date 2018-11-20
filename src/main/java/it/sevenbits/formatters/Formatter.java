@@ -1,14 +1,17 @@
-package it.sevenbits;
+package it.sevenbits.formatters;
 
 import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.WriterException;
-import it.sevenbits.writers.IWriter;
+import it.sevenbits.intefaces.IFormatter;
+import it.sevenbits.intefaces.ILexer;
+import it.sevenbits.intefaces.IToken;
+import it.sevenbits.intefaces.IWriter;
 
 
 /**
  * class for modifying code in Java-code
  */
-public class Formatter {
+public class Formatter implements IFormatter {
     private int level;
 
     /**

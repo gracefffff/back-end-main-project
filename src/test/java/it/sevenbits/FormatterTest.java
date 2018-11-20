@@ -2,6 +2,8 @@ package it.sevenbits;
 import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.exceptions.WriterException;
+import it.sevenbits.formatters.Formatter;
+import it.sevenbits.lexers.Lexer;
 import it.sevenbits.readers.StringReader;
 import it.sevenbits.writers.StringWriter;
 import org.junit.Before;

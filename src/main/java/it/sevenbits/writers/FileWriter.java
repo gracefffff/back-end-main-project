@@ -1,5 +1,7 @@
 package it.sevenbits.writers;
 import it.sevenbits.exceptions.WriterException;
+import it.sevenbits.intefaces.IWriter;
+
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;

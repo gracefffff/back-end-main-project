@@ -1,4 +1,4 @@
-package it.sevenbits;
+package it.sevenbits.intefaces;
 
 import it.sevenbits.exceptions.LexerException;
 

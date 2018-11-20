@@ -1,6 +1,7 @@
 package it.sevenbits.readers;
 
 import it.sevenbits.exceptions.ReaderException;
+import it.sevenbits.intefaces.IReader;
 
 /**
  * class to read the characters from String

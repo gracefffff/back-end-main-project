@@ -1,5 +1,7 @@
 package it.sevenbits.writers;
 
+import it.sevenbits.intefaces.IWriter;
+
 /**
  * this class do charachter writing in String
  */

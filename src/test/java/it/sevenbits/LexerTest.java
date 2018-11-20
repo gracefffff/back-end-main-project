@@ -2,12 +2,11 @@ package it.sevenbits;
 
 import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.ReaderException;
+import it.sevenbits.lexers.Lexer;
 import it.sevenbits.readers.FileReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;

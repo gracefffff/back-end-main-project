@@ -1,6 +1,7 @@
 package it.sevenbits.readers;
 
 import it.sevenbits.exceptions.ReaderException;
+import it.sevenbits.intefaces.IReader;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
