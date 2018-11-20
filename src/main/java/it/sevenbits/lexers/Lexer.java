@@ -1,13 +1,10 @@
 package it.sevenbits.lexers;
-
 import it.sevenbits.tokens.Token;
 import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.intefaces.ILexer;
 import it.sevenbits.intefaces.IReader;
 import it.sevenbits.intefaces.IToken;
-
-
 import java.util.HashMap;
 import java.util.Map;
 

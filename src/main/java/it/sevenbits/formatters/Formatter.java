@@ -1,5 +1,4 @@
 package it.sevenbits.formatters;
-
 import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.WriterException;
 import it.sevenbits.intefaces.IFormatter;
