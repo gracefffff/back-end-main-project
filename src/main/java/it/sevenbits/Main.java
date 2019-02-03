@@ -4,6 +4,7 @@ import it.sevenbits.lexers.Lexer;
 import it.sevenbits.exceptions.LexerException;
 import it.sevenbits.exceptions.ReaderException;
 import it.sevenbits.exceptions.WriterException;
+import it.sevenbits.lexers.sm.LexerStateMachine;
 import it.sevenbits.readers.FileReader;
 import it.sevenbits.writers.FileWriter;
 
@@ -15,7 +16,7 @@ public final class Main {
     }
 
     /**
-     * @param args from command line
+     * @param args from commands line
      * @throws ReaderException This class signals that read error occurred
      * @throws WriterException This class signals that read error occurred
      * @throws LexerException This class signals about Lexer errors
@@ -25,7 +26,8 @@ public final class Main {
         FileReader fileReader = new FileReader(args[0]);
         FileWriter fileWriter = new FileWriter(args[1]);
         Lexer lexer = new Lexer(fileReader);
-        formatter.format(lexer, fileWriter);
+        LexerStateMachine lexerStateMachine = new LexerStateMachine(fileReader);
+        formatter.format(lexerStateMachine, fileWriter);
         fileReader.close();
         fileWriter.close();
     }

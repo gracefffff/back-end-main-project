@@ -40,7 +40,7 @@ public class Lexer implements ILexer {
     }
 
     private boolean endToken(final StringBuilder lexeme, final char symbol) {
-        return (Character.isWhitespace(symbol) || symbol == ';') && (lexeme.length() != 0);
+        return (checkLexeme(String.valueOf(symbol))) && (lexeme.length() != 0);
     }
 
     @Override
